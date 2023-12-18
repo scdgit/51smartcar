@@ -311,7 +311,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\App\lcd1602;.\Public</IncludePath>
+              <IncludePath>.\App\lcd1602;.\Public;.\App\HCSR04;.\App\smg</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -387,6 +387,16 @@
               <FileName>lcd1602.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\App\lcd1602\lcd1602.c</FilePath>
+            </File>
+            <File>
+              <FileName>HCSR04.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\HCSR04\HCSR04.c</FilePath>
+            </File>
+            <File>
+              <FileName>smg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\smg\smg.c</FilePath>
             </File>
           </Files>
         </Group>

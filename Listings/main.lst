@@ -1,22 +1,26 @@
-C51 COMPILER V9.54   MAIN                                                                  12/18/2023 15:51:12 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  12/19/2023 01:12:19 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE User\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Public) DEBUG O
-                    -BJECTEXTEND PRINT(.\Listings\main.lst) TABS(3) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE User\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Public;.\App\HC
+                    -SR04;.\App\smg) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS(3) OBJECT(.\Objects\main.obj)
 
 line level    source
 
    1          #include "LCD1602.H"
-   2          
-   3          void main() {
-   4   1         u8 i = 0;
-   5   1         lcd1602_defaultDisplay();
-   6   1         while(1) {
-   7   2            
-   8   2         }
-   9   1      }
+   2          #include "SMG.H"
+   3          #include "HCSR04.H"
+   4          
+   5          void main() {
+   6   1         
+   7   1         initHcSr04(); // ³õÊ¼»¯³¬Éù²¨Ä£¿é
+   8   1         
+   9   1         
+  10   1         while(1) {
+  11   2            getDistance();                        
+  12   2         }
+  13   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -24,7 +28,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----       1
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

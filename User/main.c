@@ -1,9 +1,13 @@
 #include "LCD1602.H"
+#include "SMG.H"
+#include "HCSR04.H"
 
 void main() {
-	u8 i = 0;
-	// lcd1602_defaultDisplay(); // 开启LCD显示
+	
+	initHcSr04(); // 初始化超声波模块
+	
+	
 	while(1) {
-		
+		getDistance();                        
 	}
 }

@@ -9,6 +9,6 @@ void delay_ms(u16 ms) {
 }
 
 // 100us—” ±
-void delay100us(u16 ten_us) {
+void delay_10us(u16 ten_us) {
    while (ten_us--);
 }

@@ -14,6 +14,6 @@ typedef unsigned char u8;
 typedef unsigned int u16;
 
 void delay_ms(u16 ms);
-void delay100us(u16 ten_us);
+void delay_10us(u16 ten_us);
 
 #endif

@@ -1,10 +1,10 @@
-C51 COMPILER V9.54   LCD1602                                                               12/18/2023 15:51:12 PAGE 1   
+C51 COMPILER V9.54   LCD1602                                                               12/19/2023 01:12:19 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE LCD1602
 OBJECT MODULE PLACED IN .\Objects\lcd1602.obj
 COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE App\lcd1602\lcd1602.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Publi
-                    -c) DEBUG OBJECTEXTEND PRINT(.\Listings\lcd1602.lst) TABS(3) OBJECT(.\Objects\lcd1602.obj)
+                    -c;.\App\HCSR04;.\App\smg) DEBUG OBJECTEXTEND PRINT(.\Listings\lcd1602.lst) TABS(3) OBJECT(.\Objects\lcd1602.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52          // 将指定的字符串依次写入LCD1602
   53          void lcd1602_display_string(u8 row, u8 col, u8 *str) {
   54   1         u8 i = 0;
-C51 COMPILER V9.54   LCD1602                                                               12/18/2023 15:51:12 PAGE 2   
+C51 COMPILER V9.54   LCD1602                                                               12/19/2023 01:12:19 PAGE 2   
 
   55   1         if (row > 1 || col > 15) return;
   56   1         while(*str != '\0') {
