@@ -56,7 +56,7 @@ void distanceExceed() interrupt 1 {
 void distanceRestTimer() interrupt 3 {
 	TH1 = 0X00;
 	TL1 = 0X00;
-	display_msg(smg_buf, 3);(1ms延时)
+	display_msg(smg_buf, 3); //(1ms延时)
 	timer++;
 	if (timer >= 30) {
 		// 约30ms发送一次信号
