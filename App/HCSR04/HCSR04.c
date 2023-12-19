@@ -35,16 +35,21 @@ u8 getDistance() {
 	// 计算距离(cm)
 	s = (TH0 * 256 + TL0) * 0.034 / 2;
 	if (s > 50 || flag) {
-		flag = 0;
-		smg_buf[2] = SMG_NULL;
-		smg_buf[1] = SMG_NULL;
-		smg_buf[0] = SMG_NULL;
+		hcsr04ResetSmgBuf();
 	} else {
 		smg_buf[2] = gsmg_dp_buf[s / 100];
 		smg_buf[1] = gsmg_buf[s % 100 / 10];
 		smg_buf[0] = gsmg_buf[s % 10];
 	}
 	return s;
+}
+
+// 重置数码管的显示
+void hcsr04ResetSmgBuf() {
+	flag = 0;
+	smg_buf[2] = SMG_NULL;
+	smg_buf[1] = SMG_NULL;
+	smg_buf[0] = SMG_NULL;
 }
 
 // 计时溢出时，说明超出测量范围

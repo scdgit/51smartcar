@@ -7,5 +7,6 @@ sbit EchoPort = P2^7; // Ω” ’“˝Ω≈
 
 void initHcSr04();
 u8 getDistance();
+void hcsr04ResetSmgBuf();
 
 #endif

@@ -1,10 +1,10 @@
-C51 COMPILER V9.54   HCSR04                                                                12/19/2023 01:12:19 PAGE 1   
+C51 COMPILER V9.54   HCSR04                                                                12/19/2023 20:28:31 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE HCSR04
 OBJECT MODULE PLACED IN .\Objects\HCSR04.obj
 COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE App\HCSR04\HCSR04.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Public;
-                    -.\App\HCSR04;.\App\smg) DEBUG OBJECTEXTEND PRINT(.\Listings\HCSR04.lst) TABS(3) OBJECT(.\Objects\HCSR04.obj)
+                    -.\App\HCSR04;.\App\smg;.\App\key) DEBUG OBJECTEXTEND PRINT(.\Listings\HCSR04.lst) TABS(3) OBJECT(.\Objects\HCSR04.obj)
 
 line level    source
 
@@ -18,7 +18,7 @@ line level    source
    8          u8 timer = 0;
    9          u8 s = 0;
   10          
-  11          // 初始化设置定时器0，工作方式为1
+  11          // 初始化设置定时器0和定时器1，工作方式为1
   12          void initHcSr04() {
   13   1         TMOD |= 0x01;
   14   1         TH0 = 0;
@@ -45,43 +45,48 @@ line level    source
   35   1         // 计算距离(cm)
   36   1         s = (TH0 * 256 + TL0) * 0.034 / 2;
   37   1         if (s > 50 || flag) {
-  38   2            flag = 0;
-  39   2            smg_buf[2] = SMG_NULL;
-  40   2            smg_buf[1] = SMG_NULL;
-  41   2            smg_buf[0] = SMG_NULL;
-  42   2         } else {
-  43   2            smg_buf[2] = gsmg_dp_buf[s / 100];
-  44   2            smg_buf[1] = gsmg_buf[s % 100 / 10];
-  45   2            smg_buf[0] = gsmg_buf[s % 10];
-  46   2         }
-  47   1         return s;
-  48   1      }
-  49          
-  50          // 计时溢出时，说明超出测量范围
-  51          void distanceExceed() interrupt 1 {
-  52   1         flag = 1;
+  38   2            hcsr04ResetSmgBuf();
+  39   2         } else {
+  40   2            smg_buf[2] = gsmg_dp_buf[s / 100];
+  41   2            smg_buf[1] = gsmg_buf[s % 100 / 10];
+  42   2            smg_buf[0] = gsmg_buf[s % 10];
+  43   2         }
+  44   1         return s;
+  45   1      }
+  46          
+  47          // 重置数码管的显示
+  48          void hcsr04ResetSmgBuf() {
+  49   1         flag = 0;
+  50   1         smg_buf[2] = SMG_NULL;
+  51   1         smg_buf[1] = SMG_NULL;
+  52   1         smg_buf[0] = SMG_NULL;
   53   1      }
   54          
-C51 COMPILER V9.54   HCSR04                                                                12/19/2023 01:12:19 PAGE 2   
+C51 COMPILER V9.54   HCSR04                                                                12/19/2023 20:28:31 PAGE 2   
 
-  55          // 使用定时器来显示数码管和发送超声波信号(1ms延时)
-  56          void distanceRestTimer() interrupt 3 {
-  57   1         TH1 = 0X00;
-  58   1         TL1 = 0X00;
-  59   1         display_msg(smg_buf, 3);
-  60   1         timer++;
-  61   1         if (timer >= 30) {
-  62   2            // 发送信号
-  63   2            TrigPort = 1;
-  64   2            delay_10us(2);
-  65   2            TrigPort = 0;
-  66   2            timer = 0;
-  67   2         }
-  68   1      }
+  55          // 计时溢出时，说明超出测量范围
+  56          void distanceExceed() interrupt 1 {
+  57   1         flag = 1;
+  58   1      }
+  59          
+  60          // 使用定时器来显示数码管和发送超声波信号(定时器1us延时11.05926)
+  61          void distanceRestTimer() interrupt 3 {
+  62   1         TH1 = 0X00;
+  63   1         TL1 = 0X00;
+  64   1         display_msg(smg_buf, 3); //(1ms延时)
+  65   1         timer++;
+  66   1         if (timer >= 30) {
+  67   2            // 约30ms发送一次信号
+  68   2            TrigPort = 1;
+  69   2            delay_10us(2);
+  70   2            TrigPort = 0;
+  71   2            timer = 0;
+  72   2         }
+  73   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    248    ----
+   CODE SIZE        =    252    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

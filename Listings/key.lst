@@ -1,0 +1,47 @@
+C51 COMPILER V9.54   KEY                                                                   12/19/2023 20:28:31 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE App\key\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Public;.\App\
+                    -HCSR04;.\App\smg;.\App\key) DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst) TABS(3) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "KEY.H"
+   2          #include "HCSR04.H"
+   3          
+   4          u8 gkeyNum = NO_KEY_DOWN;
+   5          
+   6          // 反转键值实现功能的启动与关闭
+   7          void keyNumReverse(u8 val) {
+   8   1         gkeyNum = (gkeyNum == val) ? NO_KEY_DOWN : val;
+   9   1      }
+  10          
+  11          // 按键扫描
+  12          void key_scan() {
+  13   1         if (!K4) {
+  14   2            // 超声波模块的启动开关
+  15   2            delay_ms(20);
+  16   2            if (!K4) {
+  17   3               while(!K4);
+  18   3               keyNumReverse(K4_DOWN);
+  19   3               if (gkeyNum == NO_KEY_DOWN)
+  20   3                  hcsr04ResetSmgBuf();
+  21   3            }
+  22   2         }
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     42    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
