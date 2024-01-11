@@ -1,0 +1,70 @@
+C51 COMPILER V9.54   TIMER                                                                 12/21/2023 03:28:24 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN .\Objects\Timer.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Public\Timer.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\App\lcd1602;.\Public;.\App
+                    -\HCSR04;.\App\smg;.\App\key;.\App\SG90) DEBUG OBJECTEXTEND PRINT(.\Listings\Timer.lst) TABS(3) OBJECT(.\Objects\Timer.ob
+                    -j)
+
+line level    source
+
+   1          #include "TIMER.H"
+   2          #include "HCSR04.H"
+   3          #include "SMG.H"
+   4          
+   5          u8 smgTimer = 0;
+   6          u16 gTimer = 0; // 超声波的计时器
+   7          u16 gSgTimer = 0; // 舵机的计时器
+   8          
+   9          // 初始化定时器
+  10          void InitTimer() {
+  11   1          TMOD = 0x11;
+  12   1          TH1 = 0xff;   //定时常数 100us 晶振为11.0592MHz
+  13   1          TL1 = 0xa4;
+  14   1          ET1 = 1; 
+  15   1          TR1 = 1;
+  16   1          EA=1; 
+  17   1      }
+  18          
+  19          // 定时器0
+  20          void Timer0() interrupt 1 {
+  21   1         // 超声波测距溢出
+  22   1         gHc90Flag = 0;
+  23   1      }
+  24          
+  25          // 定时器1
+  26          void Timer1() interrupt 3 {
+  27   1         TH1 = 0xff; // 0.1ms
+  28   1         TL1 = 0xa4;
+  29   1         
+  30   1         gTimer++;
+  31   1         gSgTimer++;
+  32   1         
+  33   1         // 2ms 扫描一次数码管
+  34   1         smgTimer++;
+  35   1         if (smgTimer >= 20) {
+  36   2            display_msg(smg_buf, 3); // 0.2ms
+  37   2            smgTimer = 0;
+  38   2         }
+  39   1         
+  40   1         // 启动舵机
+  41   1         StartEngine();
+*** WARNING C206 IN LINE 41 OF Public\Timer.c: 'StartEngine': missing function-prototype
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    123    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.54   TIMER                                                                 12/21/2023 03:28:24 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

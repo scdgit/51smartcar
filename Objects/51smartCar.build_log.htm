@@ -19,16 +19,19 @@ CPU DLL:         S8051.DLL V3.100.0.0
 Dialog DLL:      DP51.DLL V2.62.0.1 
 <h2>Project:</h2>
 D:\Backup\×ÀÃæ\51smartCar\51smartCar.uvproj
-Project File Date:  12/19/2023
+Project File Date:  12/20/2023
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
 compiling main.c...
 compiling public.c...
+compiling Timer.c...
+Public\Timer.c(41): warning C206: 'StartEngine': missing function-prototype
 compiling lcd1602.c...
 compiling HCSR04.c...
 compiling smg.c...
 compiling key.c...
+compiling SG90.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LCD1602_CHECK_BUSY?LCD1602
@@ -38,9 +41,32 @@ linking...
     SEGMENT: ?PR?_LCD1602_UPDATEUSEHEX?LCD1602
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LCD1602_DEFAULTDISPLAY?LCD1602
-Program Size: data=65.1 xdata=0 code=1905
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?GETDISTANCE?HCSR04
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HC90SENDSIGNAL?HCSR04
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?KEY_SCAN?KEY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ANGLE45?SG90
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ANGLE90?SG90
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ANGLE115?SG90
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  GDIRECTION
+    MODULE:  .\Objects\key.obj (KEY)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  GDIRECTION
+    MODULE:  .\Objects\key.obj (KEY)
+    ADDRESS: 0775H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  GDIRECTION
+    MODULE:  .\Objects\key.obj (KEY)
+    ADDRESS: 077EH
+Program Size: data=73.1 xdata=0 code=2260
 creating hex file from ".\Objects\51smartCar"...
-".\Objects\51smartCar" - 0 Error(s), 4 Warning(s).
+".\Objects\51smartCar" - 0 Error(s), 14 Warning(s).
 </pre>
 </body>
 </html>

@@ -311,7 +311,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\App\lcd1602;.\Public;.\App\HCSR04;.\App\smg</IncludePath>
+              <IncludePath>.\App\lcd1602;.\Public;.\App\HCSR04;.\App\smg;.\App\key;.\App\SG90</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -378,6 +378,11 @@
               <FileType>1</FileType>
               <FilePath>.\Public\public.c</FilePath>
             </File>
+            <File>
+              <FileName>Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Public\Timer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -397,6 +402,16 @@
               <FileName>smg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\App\smg\smg.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\key\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>SG90.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\SG90\SG90.c</FilePath>
             </File>
           </Files>
         </Group>
